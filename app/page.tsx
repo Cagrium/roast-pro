@@ -81,8 +81,8 @@ export default function Home() {
         .card-hero { background: transparent; z-index: 10; justify-content: flex-start; padding-top: 100px; }
         
         /* Şeffaflık geri geldi */
-        .card-info { background: rgba(20, 30, 60, 0.6); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.1); border-radius: 40px 40px 0 0; z-index: 20; padding-bottom: 50px; }
-        .card-footer { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(40px); border-top: 1px solid rgba(255,255,255,0.05); z-index: 30; min-height: 60vh; border-radius: 40px 40px 0 0; position: relative; }
+        .card-info { background: rgba(20, 30, 60, 0.6); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.1); border-radius: 60px 60px 0 0; z-index: 20; padding-bottom: 50px; }
+        .card-footer { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(40px); border-top: 1px solid rgba(255,255,255,0.05); z-index: 30; min-height: 60vh; border-radius: 60px 60px 0 0; position: relative; }
         
         .nav-bar { 
             position: absolute; top: 0; left: 0; width: 100%; padding: 20px 40px; 
@@ -118,20 +118,26 @@ export default function Home() {
         
         /* MODALLAR */
         .modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index: 200; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px); padding: 20px; }
-        .glass-modal { background: rgba(10, 10, 15, 0.9); border: 1px solid rgba(255,255,255,0.2); padding: 40px; border-radius: 30px; max-width: 800px; width: 100%; text-align: center; position: relative; color: white; max-height: 90vh; overflow-y: auto; box-shadow: 0 50px 100px rgba(0,0,0,0.9); }
+        .glass-modal { background: #111; border: 1px solid #333; padding: 30px; border-radius: 20px; max-width: 800px; width: 100%; text-align: center; position: relative; color: white; max-height: 90vh; overflow-y: auto; box-shadow: 0 50px 100px rgba(0,0,0,0.9); }
         
         .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; }
         @media (max-width: 768px) { .pricing-grid { grid-template-columns: 1fr; } }
 
-        .price-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; display: flex; flex-direction: column; justify-content: space-between; }
+        .price-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
         .price-amount { font-size: 2rem; font-weight: 900; margin: 10px 0; }
+        .price-header { margin-bottom: 10px; }
+        .price-title { font-size: 0.9rem; color: #aaa; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .price-amount.large { font-size: 2.5rem; color: #FFD700; }
+        .price-desc { font-size: 0.8rem; color: #ccc; margin-bottom: 15px; }
+        .special-badge { position: absolute; top: 0; right: 0; background: #FF0000; color: white; font-size: 0.6rem; font-weight: bold; padding: 4px 8px; border-bottom-left-radius: 10px; }
+        .strike-price { text-decoration: line-through; color: #888; font-size: 1rem; margin-right: 8px; }
+
         .buy-btn { background: rgba(255,255,255,0.1); color: white; padding: 10px; border-radius: 50px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 10px; }
         .buy-btn.gold { background: #FFD700; color: black; }
         
         .info-grid, .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; width: 100%; max-width: 1200px; }
         .info-card { background: rgba(255,255,255,0.03); padding: 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); }
         
-        /* FOOTER RENK AYARLARI */
         .footer-col h4 { color: #FFD700; margin-bottom: 20px; font-size: 1.3rem; }
         .footer-col a { display: block; color: #aaa; margin-bottom: 10px; cursor: pointer; transition: 0.3s; text-decoration: none; }
         .footer-col a:hover { color: white; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
@@ -204,18 +210,57 @@ export default function Home() {
            <div className="glass-modal">
               <button onClick={() => setPremiumAcik(false)} style={{position:'absolute', top:'15px', right:'20px', background:'none', color:'white', fontSize:'1.5rem', cursor:'pointer'}}>✕</button>
               <h2 style={{color:'#FFD700', marginBottom:'15px', fontSize:'1.5rem'}}>PREMIUM PAKETLER 👑</h2>
+              <p style={{fontSize:'0.9rem'}}>Kalan Hakkınız: {freeRights}</p>
               <div className="pricing-grid">
-                 <div className="price-card"><h4>BAŞLANGIÇ</h4><div className="price-amount">$2.99</div><button className="buy-btn" onClick={satinAlSimulasyon}>SATIN AL</button></div>
-                 <div className="price-card"><h4>POPÜLER</h4><div className="price-amount">$7.99</div><button className="buy-btn" onClick={satinAlSimulasyon}>SATIN AL</button></div>
-                 <div className="price-card" style={{borderColor:'#FFD700'}}><h4>SINIRSIZ</h4><div className="price-amount" style={{color:'#FFD700'}}>$9.99</div><button className="buy-btn gold" onClick={satinAlSimulasyon}>SATIN AL</button></div>
+                 <div className="price-card">
+                    <div className="price-header"><div className="price-title">BAŞLANGIÇ</div><div className="price-amount">$2.99</div></div>
+                    <p className="price-desc">5 Profil Analizi</p>
+                    <button className="buy-btn" onClick={satinAlSimulasyon}>SATIN AL</button>
+                 </div>
+                 <div className="price-card">
+                    <div className="price-header"><div className="price-title">POPÜLER</div><div className="price-amount">$7.99</div></div>
+                    <p className="price-desc">25 Profil Analizi</p>
+                    <button className="buy-btn" onClick={satinAlSimulasyon}>SATIN AL</button>
+                 </div>
+                 <div className="price-card" style={{background:'rgba(255,215,0,0.15)', borderColor:'#FFD700'}}>
+                    <div className="special-badge">❄️ YILBAŞI ÖZEL</div>
+                    <div className="price-header"><div className="price-title" style={{color:'#FFD700'}}>SINIRSIZ</div><div style={{display:'flex', alignItems:'center', gap:'10px'}}><span className="strike-price">$14.99</span><span className="price-amount large">$9.99</span></div></div>
+                    <p className="price-desc">Tek Seferlik Ödeme</p>
+                    <button className="buy-btn gold" onClick={satinAlSimulasyon}>SATIN AL</button>
+                 </div>
               </div>
            </div>
         </div>
       )}
 
-      {nasilCalisirAcik && <div className="modal-overlay"><div className="glass-modal"><button onClick={() => setNasilCalisirAcik(false)} style={{position:'absolute', top:'15px', right:'20px', background:'none', color:'white', fontSize:'1.5rem', cursor:'pointer'}}>✕</button><h2>SİSTEM</h2><p>1. Veri Tara &rarr; 2. Analiz Et &rarr; 3. Roastla 🔥</p></div></div>}
-      
-      {girisAcik && <div className="modal-overlay"><div className="glass-modal"><button onClick={() => setGirisAcik(false)} style={{position:'absolute', top:'15px', right:'20px', background:'none', color:'white', fontSize:'1.5rem', cursor:'pointer'}}>✕</button><h2>{isLoginMode ? "Giriş" : "Kayıt"}</h2><input className="input-box" placeholder="Email" onChange={(e) => setUserEmail(e.target.value)} /><button className="btn-premium" onClick={girisYapSimulasyon}>Giriş Yap</button></div></div>}
+      {/* EMOJİLİ NASIL ÇALIŞIR */}
+      {nasilCalisirAcik && (
+        <div className="modal-overlay">
+           <div className="glass-modal">
+              <button onClick={() => setNasilCalisirAcik(false)} style={{position:'absolute', top:'15px', right:'20px', background:'none', color:'white', fontSize:'1.5rem', cursor:'pointer'}}>✕</button>
+              <h2 style={{fontSize:'2rem', fontWeight:'900', marginBottom:'30px'}}>SİSTEM</h2>
+              <div style={{textAlign:'left', display:'flex', flexDirection:'column', gap:'20px'}}>
+                 <div style={{display:'flex', alignItems:'center', gap:'15px'}}><span style={{fontSize:'2rem'}}>🕵️‍♂️</span><div><h4 style={{color:'#FFD700'}}>Veri Tarama</h4><p style={{fontSize:'0.9rem', color:'#ccc'}}>Profilini saniyeler içinde tarıyoruz.</p></div></div>
+                 <div style={{display:'flex', alignItems:'center', gap:'15px'}}><span style={{fontSize:'2rem'}}>🧠</span><div><h4 style={{color:'#FFD700'}}>Analiz</h4><p style={{fontSize:'0.9rem', color:'#ccc'}}>GPT-4o zayıf noktanı bulur.</p></div></div>
+                 <div style={{display:'flex', alignItems:'center', gap:'15px'}}><span style={{fontSize:'2rem'}}>🔥</span><div><h4 style={{color:'#FFD700'}}>Roast</h4><p style={{fontSize:'0.9rem', color:'#ccc'}}>En acımasız gerçekleri yüzüne vururuz.</p></div></div>
+              </div>
+           </div>
+        </div>
+      )}
+
+      {/* GİRİŞ EKRANI */}
+      {girisAcik && (
+        <div className="modal-overlay">
+           <div className="glass-modal">
+              <button onClick={() => setGirisAcik(false)} style={{position:'absolute', top:'15px', right:'20px', background:'none', color:'white', fontSize:'1.5rem', cursor:'pointer'}}>✕</button>
+              <h2 style={{fontSize:'2rem', fontWeight:'900', marginBottom:'10px'}}>{isLoginMode ? "Giriş Yap" : "Kayıt Ol"}</h2>
+              <input style={{background:'rgba(255,255,255,0.1)', border:'1px solid rgba(255,255,255,0.2)', color:'white', padding:'15px', width:'100%', borderRadius:'12px', marginBottom:'15px'}} className="input-box" placeholder="Email" onChange={(e) => setUserEmail(e.target.value)} />
+              <input style={{background:'rgba(255,255,255,0.1)', border:'1px solid rgba(255,255,255,0.2)', color:'white', padding:'15px', width:'100%', borderRadius:'12px', marginBottom:'15px'}} className="input-box" type="password" placeholder="Şifre" />
+              <button className="btn-premium" style={{marginTop:'10px', fontSize:'1rem'}} onClick={girisYapSimulasyon}>{isLoginMode ? "Giriş Yap &rarr;" : "Hesap Oluştur &rarr;"}</button>
+              <p style={{marginTop:'20px', cursor:'pointer', color:'#FFD700'}} onClick={() => setIsLoginMode(!isLoginMode)}>{isLoginMode ? "Hesabın yok mu? Kayıt Ol" : "Giriş Yap"}</p>
+           </div>
+        </div>
+      )}
       
       {yasalModal.acik && <div className="modal-overlay"><div className="glass-modal"><button onClick={() => setYasalModal({...yasalModal, acik:false})} style={{position:'absolute', top:'15px', right:'20px', background:'none', color:'white', fontSize:'1.5rem', cursor:'pointer'}}>✕</button><h2>{yasalModal.baslik}</h2><p style={{fontSize:'0.9rem'}}>{yasalModal.icerik}</p></div></div>}
 
