@@ -12,7 +12,7 @@ export default function Home() {
   const [nasilCalisirAcik, setNasilCalisirAcik] = useState(false);
   const [premiumAcik, setPremiumAcik] = useState(false);
   
-  // KULLANICI DURUMLARI
+  // USER INFO
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState("");
@@ -54,8 +54,6 @@ export default function Home() {
   return (
     <div className="page-wrapper">
       <style jsx global>{`
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html, body { overflow-x: hidden; width: 100%; }
         body { 
           font-family: 'Inter', sans-serif; 
           background: radial-gradient(circle at top left, #0055FF, #000000); 
@@ -71,7 +69,7 @@ export default function Home() {
 
         .page-wrapper { width: 100%; position: relative; }
         
-        /* --- STICKY CARD (KAYMA EFEKTİ) --- */
+        /* STICKY KARTLAR - EFSANE EFEKT */
         .section-card { 
             position: sticky; top: 0; min-height: 100vh; width: 100%; 
             display: flex; flex-direction: column; align-items: center; justify-content: center; 
@@ -79,8 +77,6 @@ export default function Home() {
         }
 
         .card-hero { background: transparent; z-index: 10; justify-content: flex-start; padding-top: 100px; }
-        
-        /* Şeffaf Cam Efekti */
         .card-info { background: rgba(20, 30, 60, 0.6); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.1); border-radius: 60px 60px 0 0; z-index: 20; padding-bottom: 50px; }
         .card-footer { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(40px); border-top: 1px solid rgba(255,255,255,0.05); z-index: 30; min-height: 60vh; border-radius: 60px 60px 0 0; position: relative; }
         
@@ -138,7 +134,6 @@ export default function Home() {
         .info-grid, .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; width: 100%; max-width: 1200px; }
         .info-card { background: rgba(255,255,255,0.03); padding: 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); }
         
-        /* FOOTER RENKLERİ */
         .footer-col h4 { color: #FFD700; margin-bottom: 20px; font-size: 1.3rem; }
         .footer-col a { display: block; color: #aaa; margin-bottom: 10px; cursor: pointer; transition: 0.3s; text-decoration: none; }
         .footer-col a:hover { color: white; padding-left: 5px; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
