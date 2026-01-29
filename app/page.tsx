@@ -140,7 +140,7 @@ export default function Home() {
         
         .footer-col h4 { color: #FFD700; margin-bottom: 20px; font-size: 1.3rem; }
         .footer-col a { display: block; color: #aaa; margin-bottom: 10px; cursor: pointer; transition: 0.3s; text-decoration: none; }
-        .footer-col a:hover { color: white; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        .footer-col a:hover { color: white; padding-left: 5px; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
         
         .x-card { background: #000; border: 1px solid #333; padding: 20px; border-radius: 16px; max-width: 600px; width: 100%; text-align: left; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
       `}</style>
@@ -233,7 +233,6 @@ export default function Home() {
         </div>
       )}
 
-      {/* EMOJİLİ NASIL ÇALIŞIR */}
       {nasilCalisirAcik && (
         <div className="modal-overlay">
            <div className="glass-modal">
@@ -248,7 +247,6 @@ export default function Home() {
         </div>
       )}
 
-      {/* GİRİŞ EKRANI */}
       {girisAcik && (
         <div className="modal-overlay">
            <div className="glass-modal">
