@@ -58,7 +58,6 @@ export default function Home() {
         html, body { overflow-x: hidden; width: 100%; }
         body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at top left, #0055FF, #000000); background-attachment: fixed; color: white; }
         
-        /* SCROLLBAR */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #111; }
         ::-webkit-scrollbar-thumb { background: #FFD700; border-radius: 4px; }
@@ -67,7 +66,6 @@ export default function Home() {
 
         .page-wrapper { width: 100%; position: relative; }
         
-        /* KARTLAR VE RESPONSIVE YAPI */
         .section-card { 
             position: sticky; top: 0; min-height: 100vh; width: 100%; 
             display: flex; flex-direction: column; align-items: center; justify-content: center; 
@@ -78,14 +76,12 @@ export default function Home() {
         .card-info { background: rgba(20, 30, 60, 0.9); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.1); border-radius: 40px 40px 0 0; z-index: 20; padding-bottom: 50px; }
         .card-footer { background: #050505; border-top: 1px solid rgba(255,255,255,0.05); z-index: 30; min-height: 50vh; border-radius: 40px 40px 0 0; position: relative; }
         
-        /* NAVBAR */
         .nav-bar { 
             position: absolute; top: 0; left: 0; width: 100%; padding: 20px 40px; 
             display: flex; justify-content: space-between; align-items: center; z-index: 100; flex-wrap: wrap; gap: 10px;
         }
         .nav-right { display: flex; align-items: center; gap: 15px; }
 
-        /* MOBİL İÇİN NAVBAR AYARI */
         @media (max-width: 600px) {
             .nav-bar { padding: 15px 20px; flex-direction: column; gap: 15px; }
             .nav-right { width: 100%; justify-content: center; }
@@ -94,22 +90,19 @@ export default function Home() {
         .premium-badge { background: linear-gradient(45deg, #FFD700, #FFA500); color: black; padding: 5px 12px; border-radius: 20px; font-weight: 900; cursor: pointer; font-size: 0.8rem; }
         .login-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); padding: 8px 20px; border-radius: 50px; font-weight: 800; cursor: pointer; color: white; backdrop-filter: blur(10px); }
         
-        /* ANA İÇERİK */
         .content-container { 
             max-width: 1200px; width: 100%; margin: 0 auto; 
             display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 40px; 
             position: relative; z-index: 10;
         }
         
-        /* MOBİLDE İÇERİK TERS DÖNSÜN (Yazı üstte kalsın) */
         @media (max-width: 768px) {
             .content-container { flex-direction: column; text-align: center; gap: 20px; }
-            .card-hero { justify-content: center; padding-top: 140px; } /* Mobilde üstten boşluk */
+            .card-hero { justify-content: center; padding-top: 140px; } 
         }
 
         .hero-title { font-size: 4.5rem; font-weight: 900; line-height: 1; letter-spacing: -2px; margin-bottom: 20px; text-transform: uppercase; }
         
-        /* MOBİL FONT AYARLARI */
         @media (max-width: 768px) { 
             .hero-title { font-size: 2.8rem; } 
             p { font-size: 1rem !important; }
@@ -124,20 +117,17 @@ export default function Home() {
         .input-box { background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.2); color: white; padding: 15px; width: 100%; border-radius: 12px; font-size: 1rem; font-weight: bold; margin-bottom: 15px; }
         .btn-premium { background: #FFD700; color: black; font-weight: 900; font-size: 1.1rem; padding: 15px; width: 100%; border-radius: 12px; cursor: pointer; }
         
-        /* MODALLAR */
         .modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index: 200; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px); padding: 20px; }
         .glass-modal { background: #111; border: 1px solid #333; padding: 30px; border-radius: 20px; max-width: 800px; width: 100%; text-align: center; position: relative; color: white; max-height: 90vh; overflow-y: auto; }
         
-        /* PRICING GRID (RESPONSIVE) */
         .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; }
-        @media (max-width: 768px) { .pricing-grid { grid-template-columns: 1fr; } } /* Telefondan tek sütun */
+        @media (max-width: 768px) { .pricing-grid { grid-template-columns: 1fr; } }
 
         .price-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; display: flex; flex-direction: column; justify-content: space-between; }
         .price-amount { font-size: 2rem; font-weight: 900; margin: 10px 0; }
         .buy-btn { background: rgba(255,255,255,0.1); color: white; padding: 10px; border-radius: 50px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 10px; }
         .buy-btn.gold { background: #FFD700; color: black; }
         
-        /* FOOTER GRID (RESPONSIVE) */
         .info-grid, .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; width: 100%; max-width: 1200px; }
         .info-card { background: rgba(255,255,255,0.03); padding: 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); }
         
@@ -209,7 +199,7 @@ export default function Home() {
         </div>
       )}
 
-      {nasilCalisirAcik && <div className="modal-overlay"><div className="glass-modal"><button onClick={() => setNasilCalisirAcik(false)} style={{position:'absolute', top:'15px', right:'20px', background:'none', color:'white', fontSize:'1.5rem', cursor:'pointer'}}>✕</button><h2>SİSTEM</h2><p>1. Veri Tara -> 2. Analiz Et -> 3. Roastla 🔥</p></div></div>}
+      {nasilCalisirAcik && <div className="modal-overlay"><div className="glass-modal"><button onClick={() => setNasilCalisirAcik(false)} style={{position:'absolute', top:'15px', right:'20px', background:'none', color:'white', fontSize:'1.5rem', cursor:'pointer'}}>✕</button><h2>SİSTEM</h2><p>1. Veri Tara &rarr; 2. Analiz Et &rarr; 3. Roastla 🔥</p></div></div>}
       
       {girisAcik && <div className="modal-overlay"><div className="glass-modal"><button onClick={() => setGirisAcik(false)} style={{position:'absolute', top:'15px', right:'20px', background:'none', color:'white', fontSize:'1.5rem', cursor:'pointer'}}>✕</button><h2>{isLoginMode ? "Giriş" : "Kayıt"}</h2><input className="input-box" placeholder="Email" onChange={(e) => setUserEmail(e.target.value)} /><button className="btn-premium" onClick={girisYapSimulasyon}>Giriş Yap</button></div></div>}
       
