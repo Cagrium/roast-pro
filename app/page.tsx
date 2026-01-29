@@ -54,12 +54,13 @@ export default function Home() {
   return (
     <div className="page-wrapper">
       <style jsx global>{`
-        /* --- GENEL AYARLAR (HERKES İÇİN) --- */
+        /* --- GENEL AYARLAR --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html, body { overflow-x: hidden; width: 100%; }
         body { 
           font-family: 'Inter', sans-serif; 
-          background: radial-gradient(circle at top left, #0055FF, #000000); 
+          background: #000; /* Arka planı tamamen siyah yaptık ki çakışma olmasın */
+          background-image: radial-gradient(circle at top left, #0044cc, #000000 60%);
           background-attachment: fixed; 
           color: white; 
         }
@@ -69,42 +70,64 @@ export default function Home() {
         ::-webkit-scrollbar-thumb { background: #FFD700; border-radius: 5px; }
 
         .page-wrapper { width: 100%; position: relative; }
-        .nav-bar { position: absolute; top: 0; left: 0; width: 100%; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
         
-        /* Ortak Bileşenler */
+        /* Navbar Sabit */
+        .nav-bar { 
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 999; 
+            padding: 20px 40px; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(0,0,0,0.3); backdrop-filter: blur(10px);
+        }
+        
+        /* Bileşenler */
         .premium-badge { background: linear-gradient(45deg, #FFD700, #FFA500); color: black; padding: 5px 12px; border-radius: 20px; font-weight: 900; cursor: pointer; font-size: 0.9rem; }
         .login-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); padding: 8px 20px; border-radius: 50px; font-weight: 800; cursor: pointer; color: white; backdrop-filter: blur(10px); }
         .input-box { background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.2); color: white; padding: 15px; width: 100%; border-radius: 12px; font-size: 1.1rem; font-weight: bold; margin-bottom: 20px; }
         .btn-premium { background: #FFD700; color: black; font-weight: 900; font-size: 1.1rem; padding: 15px; width: 100%; border-radius: 12px; cursor: pointer; }
 
-        /* Modal Ortak */
-        .modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index: 200; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px); padding: 20px; }
+        /* Modal */
+        .modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index: 2000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px); padding: 20px; }
         .glass-modal { background: #111; border: 1px solid #333; padding: 30px; border-radius: 20px; width: 100%; text-align: center; position: relative; color: white; max-height: 90vh; overflow-y: auto; }
 
         /* =========================================
-           💻 PC GÖRÜNÜMÜ (769px ve Üstü)
+           💻 PC GÖRÜNÜMÜ (Sticky ve Solid Background)
            ========================================= */
         @media (min-width: 769px) {
             .section-card { 
                 position: sticky; top: 0; min-height: 100vh; width: 100%; 
                 display: flex; flex-direction: column; align-items: center; justify-content: center; 
-                box-shadow: 0 -10px 40px rgba(0,0,0,0.5); padding: 20px;
+                box-shadow: 0 -20px 50px rgba(0,0,0,0.8); padding: 20px;
+                /* ÖNEMLİ: Arka planlar artık daha koyu, çakışmayı önler */
             }
-            .card-hero { background: transparent; z-index: 10; justify-content: flex-start; padding-top: 120px; }
-            .card-info { background: rgba(20, 30, 60, 0.7); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.1); border-radius: 60px 60px 0 0; z-index: 20; padding-bottom: 50px; }
-            .card-footer { background: #050505; border-top: 1px solid rgba(255,255,255,0.05); z-index: 30; min-height: 60vh; border-radius: 60px 60px 0 0; }
+            
+            /* 1. HERO: Saydam olabilir çünkü en altta */
+            .card-hero { background: transparent; z-index: 10; padding-top: 80px; }
+            
+            /* 2. INFO: Üstüne bindiğinde alttakini kapatmalı */
+            .card-info { 
+                background: #0a0f1e; /* KOYU RENK - Şeffaflık yok */
+                border-top: 1px solid rgba(255,255,255,0.1); 
+                z-index: 20; 
+                border-radius: 40px 40px 0 0;
+            }
+            
+            /* 3. FOOTER: En üstte, kapkaranlık */
+            .card-footer { 
+                background: #000; 
+                z-index: 30; 
+                border-radius: 40px 40px 0 0; 
+                border-top: 1px solid rgba(255,255,255,0.1);
+            }
 
-            .nav-bar { padding: 30px 50px; }
             .nav-right { display: flex; align-items: center; gap: 20px; }
             
             .content-container { 
                 max-width: 1200px; width: 90%; margin: 0 auto; 
-                display: flex; flex-direction: row; /* Yan yana */
-                align-items: center; justify-content: center; gap: 50px; 
+                display: flex; flex-direction: row; 
+                align-items: center; justify-content: center; gap: 80px; 
             }
             
-            .hero-title { font-size: 5rem; font-weight: 900; line-height: 0.9; margin-bottom: 20px; }
-            .roket { font-size: 220px; }
+            .hero-title { font-size: 5rem; font-weight: 900; line-height: 0.95; margin-bottom: 30px; }
+            .roket { font-size: 250px; }
             
             .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px; }
             .info-grid, .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; width: 100%; max-width: 1200px; }
@@ -113,26 +136,30 @@ export default function Home() {
         }
 
         /* =========================================
-           📱 MOBİL GÖRÜNÜM (768px ve Altı)
+           📱 MOBİL GÖRÜNÜM (Normal Akış)
            ========================================= */
         @media (max-width: 768px) {
-            /* Sticky'yi iptal ediyoruz, normal aksın */
-            .section-card { position: relative; min-height: auto; padding: 40px 20px; width: 100%; display: flex; flex-direction: column; }
-            
-            .card-hero { padding-top: 100px; padding-bottom: 50px; }
-            .card-info { background: rgba(0,0,0,0.8); border-radius: 30px; margin-bottom: 20px; }
-            .card-footer { background: #000; border-radius: 30px; }
-
-            .nav-bar { padding: 20px; flex-direction: column; gap: 15px; background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); }
-            .nav-right { width: 100%; justify-content: center; gap: 10px; }
-            
-            .content-container { 
-                width: 100%; display: flex; flex-direction: column; /* Alt alta */
-                text-align: center; gap: 30px; 
+            .section-card { 
+                position: relative; /* Sticky YOK */
+                min-height: auto; 
+                padding: 100px 20px 50px 20px; 
+                width: 100%; display: flex; flex-direction: column;
+                background: transparent !important; /* Mobilde arka plan derdi yok */
             }
             
-            .hero-title { font-size: 3rem; line-height: 1; }
-            .roket { font-size: 100px; order: -1; } /* Roket üste geçsin */
+            .card-info { background: rgba(0,0,0,0.5) !important; border-radius: 0; padding-top: 50px; }
+            .card-footer { background: #000 !important; border-radius: 0; }
+
+            .nav-bar { padding: 15px 20px; }
+            .nav-right { display: none; } /* Mobilde üst menüyü sadeleştirdik */
+            
+            .content-container { 
+                width: 100%; display: flex; flex-direction: column; 
+                text-align: center; gap: 40px; 
+            }
+            
+            .hero-title { font-size: 3rem; line-height: 1.1; }
+            .roket { font-size: 120px; order: -1; margin-bottom: 20px; }
             
             .pricing-grid { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
             .info-grid { display: flex; flex-direction: column; gap: 20px; }
@@ -141,12 +168,12 @@ export default function Home() {
             .glass-modal { max-width: 95%; padding: 25px; }
         }
 
-        /* DİĞER CSS DETAYLARI */
-        .price-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; }
+        /* DİĞER DETAYLAR */
+        .price-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; text-align: center; }
         .price-amount { font-size: 2rem; font-weight: 900; margin: 10px 0; }
         .buy-btn { background: rgba(255,255,255,0.1); width: 100%; padding: 10px; border-radius: 50px; font-weight: bold; cursor: pointer; margin-top: 10px; color: white; }
         .buy-btn.gold { background: #FFD700; color: black; }
-        .info-card { background: rgba(255,255,255,0.03); padding: 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); }
+        .info-card { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); text-align: center; }
         .x-card { background: #000; border: 1px solid #333; padding: 20px; border-radius: 16px; max-width: 600px; width: 100%; text-align: left; position: relative; margin: 0 auto; }
         .x-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
         .x-user { display: flex; gap: 10px; } 
@@ -185,7 +212,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. INFO KARTI */}
+      {/* 2. INFO KARTI (ARKA PLANI KOYU, ÇAKIŞMAZ) */}
       <section className="section-card card-info">
          <div className="content-container" style={{flexDirection:'column', gap:'30px'}}>
             <h2 style={{fontSize:'2.5rem', fontWeight:'900'}}>NEDEN?</h2>
